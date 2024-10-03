@@ -114,16 +114,31 @@ const updateUserDetails = (req, res)=>{
     try{
         const { name, dob, emailId, address, category, role, grade, updatedBy, bookLimit, currentBookLimit ,id} = req.body;
         db.query(
-            `update user SET name=?, dob=?, emailId=?, address=?, category=?, role=?, grade=?, updatedBy=?, bookLimit=?, currentBookLimit=? WHERE id=?) 
+            `update user SET name=?, dob=?, emailId=?, address=?, category=?, role=?, grade=?, updatedBy=?, bookLimit=?, currentBookLimit=? WHERE id=? 
             `,
             [name, dob, emailId, address, category, role, grade, updatedBy, bookLimit, currentBookLimit,id]
         );
 
-        res.status(201).json({ 'status': "successfully user Details updated..!" })
+        res.status(201).json({ 'status': "successfully user Details update1..!" });
 
     }catch(e){
 
     }
 }
 
-module.exports = { createUser, createBook, getUsersList ,getUserDetails, updateUserDetails}
+const updateBookDetails = (request, response)=>{
+    try{
+        console.log('req.body', request)
+        const { title, author, yearofmade, totalcount, avlblcount, publisher, subject,  updatedBy , id} = request.body;
+        db.query(
+            `UPDATE  books SET title=?, author=?, yearofmade=?, totalcount=?, avlblcount=?, publisher=?, subject=?,  updatedBy=? WHERE id=?`,
+            [title, author, yearofmade, totalcount, avlblcount, publisher, subject, updatedBy, id]
+        );
+
+        response.status(201).json({ 'status': "successfully book details updated for "+id });
+    }catch(e){
+
+    }
+}
+
+module.exports = { createUser, createBook, getUsersList ,getUserDetails, updateUserDetails ,updateBookDetails}

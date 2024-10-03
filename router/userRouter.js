@@ -12,6 +12,8 @@ router.get("/userList", userController.getUsersList);
 
 router.get("/details/:id", userController.getUserDetails)
 
-router.post("/updateUserDetails", userController.updateUserDetails)
+router.post("/updateUserDetails", userController.updateUserDetails);
+
+router.post("/updateBookDetails", userController.updateBookDetails)
 
 module.exports = router
